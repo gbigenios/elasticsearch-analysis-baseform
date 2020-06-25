@@ -1,18 +1,24 @@
 {
-   "index" : {
-      "analysis" : {
-          "filter" : {
-              "baseform" : {
-                  "type" : "baseform",
-                  "language" : "en"
-              }
-          },
-          "analyzer" : {
-              "baseform" : {
-                  "tokenizer" : "standard",
-                  "filter" : [ "baseform", "unique" ]
-              }
-          }
+  "index": {
+    "analysis": {
+      "filter": {
+        "baseform": {
+          "type": "baseform",
+          "language": "en"
+        },
+        "unique": {
+          "type": "unique"
+        }
+      },
+      "analyzer": {
+        "baseform": {
+          "tokenizer": "standard",
+          "filter": [
+            "baseform",
+            "unique"
+          ]
+        }
       }
-   }
+    }
+  }
 }
