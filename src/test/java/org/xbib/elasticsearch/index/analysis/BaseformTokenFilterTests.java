@@ -7,7 +7,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.elasticsearch.Version;
-import org.elasticsearch.cluster.metadata.IndexMetaData;
+import org.elasticsearch.cluster.metadata.IndexMetadata;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.xbib.elasticsearch.plugin.analysis.baseform.AnalysisBaseformPlugin;
 
 public class BaseformTokenFilterTests extends ESTestCase {
-	
+
     @Test
     public void testOne() throws IOException {
 
@@ -89,12 +89,12 @@ public class BaseformTokenFilterTests extends ESTestCase {
         tokenizer.setReader(new StringReader(source));
         assertSimpleTSOutput(tokenFilter.create(tokenizer), expected);
     }
-    
+
     private TestAnalysis createTestAnalysis() throws IOException {
         Settings settings = Settings.builder()
-                .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
+                .put(IndexMetadata.SETTING_VERSION_CREATED, Version.CURRENT)
                 .build();
-        IndexMetaData indexMetaData = IndexMetaData.builder("test")
+        IndexMetadata indexMetaData = IndexMetadata.builder("test")
                 .settings(settings)
                 .numberOfShards(1)
                 .numberOfReplicas(1)

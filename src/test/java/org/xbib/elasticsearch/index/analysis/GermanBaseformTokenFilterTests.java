@@ -5,8 +5,7 @@ import java.io.IOException;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.elasticsearch.Version;
-import org.elasticsearch.analysis.common.CommonAnalysisPlugin;
-import org.elasticsearch.cluster.metadata.IndexMetaData;
+import org.elasticsearch.cluster.metadata.IndexMetadata;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.NamedAnalyzer;
@@ -38,6 +37,7 @@ public class GermanBaseformTokenFilterTests extends ESTestCase {
             "Rechtsanwaltskanzlei",
             "auf",
             "dem",
+            "der",
             "Donaudampfschiff",
             "hat",
             "haben",
@@ -83,10 +83,10 @@ public class GermanBaseformTokenFilterTests extends ESTestCase {
 
     private static TestAnalysis createTestAnalysis(String resource) throws IOException {
         Settings settings = Settings.builder()
-                .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
+                .put(IndexMetadata.SETTING_VERSION_CREATED, Version.CURRENT)
                 .loadFromStream(resource, ClassLoader.getSystemClassLoader().getResourceAsStream(resource), false)
                 .build();
-        IndexMetaData indexMetaData = IndexMetaData.builder("test")
+        IndexMetadata indexMetaData = IndexMetadata.builder("test")
                 .settings(settings)
                 .numberOfShards(1)
                 .numberOfReplicas(1)
@@ -95,7 +95,7 @@ public class GermanBaseformTokenFilterTests extends ESTestCase {
         			.put(AnalysisBaseformPlugin.SETTING_MAX_CACHE_SIZE.getKey(), 131072)
                 .put("path.home", System.getProperty("path.home", "/tmp"))
                 .build();
-        TestAnalysis analysis = createTestAnalysis(new IndexSettings(indexMetaData, nodeSettings), nodeSettings, new AnalysisBaseformPlugin(nodeSettings), new CommonAnalysisPlugin());
+        TestAnalysis analysis = createTestAnalysis(new IndexSettings(indexMetaData, nodeSettings), nodeSettings, new AnalysisBaseformPlugin(nodeSettings));
         return analysis;
     }
 

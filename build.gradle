@@ -61,7 +61,6 @@ dependencies {
     testCompile "org.apache.logging.log4j:log4j-core:${project.property('log4j.version')}"
     testCompile "org.elasticsearch.plugin:transport-netty4-client:${project.property('elasticsearch.version')}"
     testCompile "org.elasticsearch.test:framework:${project.property('elasticsearch.version')}"
-    testCompile "org.codelibs.elasticsearch.module:analysis-common:${project.property('elasticsearch.version')}"
     distJars "${project.group}:${project.name}:${project.version}"
     wagon "org.apache.maven.wagon:wagon-ssh:${project.property('wagon.version')}"
 }
@@ -77,7 +76,7 @@ tasks.withType(JavaCompile) {
 test {
     systemProperties['path.home'] = System.getProperty("user.dir")
     systemProperties['tests.security.manager'] = false
-    
+
     testLogging {
         showStandardStreams = false
         exceptionFormat = 'full'

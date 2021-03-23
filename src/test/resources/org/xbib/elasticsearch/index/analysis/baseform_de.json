@@ -5,17 +5,13 @@
         "baseform": {
           "type": "baseform",
           "language": "de"
-        },
-        "unique": {
-          "type": "unique"
         }
       },
       "analyzer": {
         "baseform": {
           "tokenizer": "standard",
           "filter": [
-            "baseform",
-            "unique"
+            "baseform"
           ]
         }
       }
